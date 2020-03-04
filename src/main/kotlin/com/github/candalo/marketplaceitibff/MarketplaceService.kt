@@ -1,5 +1,6 @@
 package com.github.candalo.marketplaceitibff
 
+import br.com.zup.beagle.widget.layout.Horizontal
 import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
@@ -10,23 +11,24 @@ import org.springframework.stereotype.Service
 @Service
 class MarketplaceService {
 
-    fun getProducts() = Screen(
-            content = ListView(
-                    rows = getProductsMock().map { product -> ProductWidget(
-                            product.id,
-                            product.shortDescription,
-                            "#666666",
-                            16,
-                            product.longDescription,
-                            "#909090",
-                            12,
-                            product.imageUrl,
-                            "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
-                            "#FE5886",
-                            14
-                    )}
-            )
-    )
+    fun getProducts(): Screen {
+        val productPairs = getProductsMock().chunked(2).map { productPair ->
+            Horizontal(children = productPair.map { product -> ProductWidget(
+                    product.id,
+                    product.shortDescription,
+                    "#666666",
+                    16,
+                    product.longDescription,
+                    "#909090",
+                    12,
+                    product.imageUrl,
+                    "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
+                    "#FE5886",
+                    14
+            )})
+        }
+        return Screen(content = ListView(rows = productPairs))
+    }
 
     private fun getProductsMock() = listOf(
             Product(
