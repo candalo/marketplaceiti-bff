@@ -15,8 +15,15 @@ class MarketplaceService {
                     rows = getProductsMock().map { product -> ProductWidget(
                             product.id,
                             product.shortDescription,
+                            "#666666",
+                            16,
                             product.longDescription,
-                            "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()} ${product.price.amount}"
+                            "#909090",
+                            12,
+                            product.imageUrl,
+                            "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
+                            "#FE5886",
+                            14
                     )}
             )
     )

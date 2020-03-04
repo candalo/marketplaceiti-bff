@@ -1,4 +1,4 @@
-package com.github.candalo.marketplaceitibff.core
+package com.github.candalo.marketplaceitibff
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
