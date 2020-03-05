@@ -1,6 +1,7 @@
 package com.github.candalo.marketplaceitibff
 
 import br.com.zup.beagle.widget.layout.Horizontal
+import br.com.zup.beagle.widget.layout.NavigationBar
 import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
@@ -33,7 +34,10 @@ class MarketplaceService(private val api: Api) {
                 )
             })
         }
-        return Screen(content = ListView(rows = productPairs))
+        return Screen(
+                content = ListView(rows = productPairs),
+                navigationBar = NavigationBar(title = "Coffee", showBackButton = false)
+        )
     }
 
     fun getProductById(id: String): Screen {
@@ -56,7 +60,10 @@ class MarketplaceService(private val api: Api) {
         )
         val productControlWidget = ProductControlWidget("#FE5789")
 
-        return Screen(content = ProductDetailsWidget(productWidget, productControlWidget))
+        return Screen(
+                content = ProductDetailsWidget(productWidget, productControlWidget),
+                navigationBar = NavigationBar(title = product.name, showBackButton = true)
+        )
     }
 
     fun getProductsOrdersStatus(state: String) = Screen(
@@ -82,7 +89,8 @@ class MarketplaceService(private val api: Api) {
                                 20
                         )
                     }
-            )
+            ),
+            navigationBar = NavigationBar(title = "Cart", showBackButton = true)
     )
 
     private fun getProductsMock() = listOf(
