@@ -5,14 +5,15 @@ import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
 import com.github.candalo.marketplaceitibff.models.Product
+import com.github.candalo.marketplaceitibff.net.Api
 import com.github.candalo.marketplaceitibff.widgets.*
 import org.springframework.stereotype.Service
 
 @Service
-class MarketplaceService {
+class MarketplaceService(private val api: Api) {
 
     fun getProducts(): Screen {
-        val productPairs = getProductsMock().chunked(2).map { productPair ->
+        val productPairs = api.fetchProducts().chunked(2).map { productPair ->
             Horizontal(children = productPair.map { product ->
                 ProductWidget(
                         product.id,
@@ -86,7 +87,7 @@ class MarketplaceService {
 
     private fun getProductsMock() = listOf(
             Product(
-                    1,
+                    "1",
                     "1",
                     "Espresso",
                     "Blue Ridge Blend",
@@ -99,7 +100,7 @@ class MarketplaceService {
                     )
             ),
             Product(
-                    2,
+                    "2",
                     "2",
                     "Choco Frappe",
                     "Locally Roasted",
@@ -112,7 +113,7 @@ class MarketplaceService {
                     )
             ),
             Product(
-                    3,
+                    "3",
                     "3",
                     "Caramel Frappe",
                     "Decaf Colombia",
