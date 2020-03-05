@@ -7,6 +7,7 @@ import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
 import com.github.candalo.marketplaceitibff.models.Product
 import com.github.candalo.marketplaceitibff.widgets.OrderStatusWidget
+import com.github.candalo.marketplaceitibff.widgets.ProductControlWidget
 import com.github.candalo.marketplaceitibff.widgets.ProductWidget
 import org.springframework.stereotype.Service
 
@@ -34,7 +35,24 @@ class MarketplaceService {
         return Screen(content = ListView(rows = productPairs))
     }
 
-    fun getProductById(id: String) = Screen(content = Container(children = listOf()))
+    fun getProductById(id: String): Screen {
+        val product = getProductsMock()[0]
+        val productWidget = ProductWidget(
+                product.id,
+                product.shortDescription,
+                "#666666",
+                16,
+                product.longDescription,
+                "#909090",
+                12,
+                product.imageUrl,
+                "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
+                "#FE5886",
+                14
+        )
+
+        return Screen(content = ProductControlWidget(productWidget, "#FE5789"))
+    }
 
     fun getProductsOrdersStatus(state: String) = Screen(
             content = OrderStatusWidget(
