@@ -1,5 +1,6 @@
 package com.github.candalo.marketplaceitibff
 
+import br.com.zup.beagle.widget.layout.Container
 import br.com.zup.beagle.widget.layout.Horizontal
 import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
@@ -32,6 +33,8 @@ class MarketplaceService {
         }
         return Screen(content = ListView(rows = productPairs))
     }
+
+    fun getProductById(id: String) = Screen(content = Container(children = listOf()))
 
     fun getProductsOrdersStatus(state: String) = Screen(
             content = OrderStatusWidget(
