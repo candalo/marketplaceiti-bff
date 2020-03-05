@@ -17,4 +17,7 @@ class MarketplaceController(private val service: MarketplaceService) {
     @GetMapping("/products/orders/status")
     fun getProductsOrdersStatus(@RequestParam state: String) = service.getProductsOrdersStatus(state)
 
+    @GetMapping("/cart/products")
+    fun getCartProducts() = service.getCartProducts()
+
 }
