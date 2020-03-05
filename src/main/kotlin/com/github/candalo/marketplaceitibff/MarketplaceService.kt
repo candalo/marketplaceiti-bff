@@ -5,10 +5,7 @@ import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
 import com.github.candalo.marketplaceitibff.models.Product
-import com.github.candalo.marketplaceitibff.widgets.OrderStatusWidget
-import com.github.candalo.marketplaceitibff.widgets.ProductControlWidget
-import com.github.candalo.marketplaceitibff.widgets.ProductDetailsWidget
-import com.github.candalo.marketplaceitibff.widgets.ProductWidget
+import com.github.candalo.marketplaceitibff.widgets.*
 import org.springframework.stereotype.Service
 
 @Service
@@ -71,7 +68,21 @@ class MarketplaceService {
             )
     )
 
-    fun getCartProducts() { TODO() }
+    fun getCartProducts(): Screen = Screen(
+            content = ListView(
+                    rows = getProductsMock().map { product ->
+                        CartProductWidget(
+                                product.imageUrl,
+                                product.name,
+                                "#666666",
+                                32,
+                                "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
+                                "#FE5886",
+                                24
+                        )
+                    }
+            )
+    )
 
     private fun getProductsMock() = listOf(
             Product(
