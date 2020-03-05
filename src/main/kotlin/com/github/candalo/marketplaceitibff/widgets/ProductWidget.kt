@@ -6,6 +6,7 @@ import br.com.zup.beagle.widget.Widget
 @RegisterWidget
 data class ProductWidget(
         val id: String,
+        val sku: String,
         val title: String,
         val titleColor: String,
         val titleSize: Int,

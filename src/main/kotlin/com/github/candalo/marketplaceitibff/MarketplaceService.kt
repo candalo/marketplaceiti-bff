@@ -1,7 +1,9 @@
 package com.github.candalo.marketplaceitibff
 
+import br.com.zup.beagle.action.CustomAction
 import br.com.zup.beagle.widget.layout.Horizontal
 import br.com.zup.beagle.widget.layout.NavigationBar
+import br.com.zup.beagle.widget.layout.NavigationBarItem
 import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
@@ -18,6 +20,7 @@ class MarketplaceService(private val api: Api) {
             Horizontal(children = productPair.map { product ->
                 ProductWidget(
                         product.id,
+                        product.sku,
                         product.name,
                         "#666666",
                         16,
@@ -36,7 +39,17 @@ class MarketplaceService(private val api: Api) {
         }
         return Screen(
                 content = ListView(rows = productPairs),
-                navigationBar = NavigationBar(title = "Coffee", showBackButton = false)
+                navigationBar = NavigationBar(
+                        title = "Coffee",
+                        showBackButton = false,
+                        navigationBarItems = listOf(NavigationBarItem(
+                                text = "cart",
+                                image = "resources/cart.png",
+                                action = CustomAction(
+                                        name = "cart",
+                                        data = mapOf()
+                                )))
+                )
         )
     }
 
@@ -44,6 +57,7 @@ class MarketplaceService(private val api: Api) {
         val product = api.fetchProductById(id)
         val productWidget = ProductWidget(
                 product.id,
+                product.sku,
                 product.name,
                 "#666666",
                 24,
@@ -62,7 +76,16 @@ class MarketplaceService(private val api: Api) {
 
         return Screen(
                 content = ProductDetailsWidget(productWidget, productControlWidget),
-                navigationBar = NavigationBar(title = product.name, showBackButton = true)
+                navigationBar = NavigationBar(
+                        title = product.name,
+                        showBackButton = true,
+                        navigationBarItems = listOf(NavigationBarItem(
+                                text = "cart",
+                                action = CustomAction(
+                                        name = "cart",
+                                        data = mapOf()
+                        )))
+                )
         )
     }
 
