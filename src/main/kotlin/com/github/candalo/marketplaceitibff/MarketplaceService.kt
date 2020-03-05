@@ -5,6 +5,7 @@ import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
 import com.github.candalo.marketplaceitibff.models.Price
 import com.github.candalo.marketplaceitibff.models.Product
+import com.github.candalo.marketplaceitibff.widgets.OrderStatusWidget
 import com.github.candalo.marketplaceitibff.widgets.ProductWidget
 import org.springframework.stereotype.Service
 
@@ -13,22 +14,34 @@ class MarketplaceService {
 
     fun getProducts(): Screen {
         val productPairs = getProductsMock().chunked(2).map { productPair ->
-            Horizontal(children = productPair.map { product -> ProductWidget(
-                    product.id,
-                    product.shortDescription,
-                    "#666666",
-                    16,
-                    product.longDescription,
-                    "#909090",
-                    12,
-                    product.imageUrl,
-                    "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
-                    "#FE5886",
-                    14
-            )})
+            Horizontal(children = productPair.map { product ->
+                ProductWidget(
+                        product.id,
+                        product.shortDescription,
+                        "#666666",
+                        16,
+                        product.longDescription,
+                        "#909090",
+                        12,
+                        product.imageUrl,
+                        "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
+                        "#FE5886",
+                        14
+                )
+            })
         }
         return Screen(content = ListView(rows = productPairs))
     }
+
+    fun getProductsOrdersStatus(state: String) = Screen(
+            content = OrderStatusWidget(
+                    if (state == "success") OrderStatusWidget.State.Success else OrderStatusWidget.State.Error,
+                    "Order successfully!",
+                    "#FE5886",
+                    "All right with your order.",
+                    "#000000"
+            )
+    )
 
     private fun getProductsMock() = listOf(
             Product(
