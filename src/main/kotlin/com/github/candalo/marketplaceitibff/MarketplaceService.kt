@@ -19,12 +19,15 @@ class MarketplaceService {
             Horizontal(children = productPair.map { product ->
                 ProductWidget(
                         product.id,
-                        product.shortDescription,
+                        product.name,
                         "#666666",
                         16,
-                        product.longDescription,
+                        product.shortDescription,
                         "#909090",
                         12,
+                        "",
+                        "",
+                        0,
                         product.imageUrl,
                         "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
                         "#FE5886",
@@ -39,9 +42,12 @@ class MarketplaceService {
         val product = getProductsMock()[0]
         val productWidget = ProductWidget(
                 product.id,
-                product.shortDescription,
+                product.name,
                 "#666666",
                 16,
+                product.shortDescription,
+                "#909090",
+                12,
                 product.longDescription,
                 "#909090",
                 12,
@@ -71,6 +77,7 @@ class MarketplaceService {
                     "1",
                     "Espresso",
                     "Blue Ridge Blend",
+                    "A deliciously creamy Coffee Kick Frappé, topped with irresistible whipped cream and indulgent Coffee Drizzle. Perfect combination.",
                     "https://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG",
                     Price(
                             10,
@@ -83,6 +90,7 @@ class MarketplaceService {
                     "2",
                     "Choco Frappe",
                     "Locally Roasted",
+                    "A deliciously creamy Coffee Kick Frappé, topped with irresistible whipped cream and indulgent Coffee Drizzle. Perfect combination.",
                     "https://media3.s-nbcnews.com/j/newscms/2019_33/2203981/171026-better-coffee-boost-se-329p_67dfb6820f7d3898b5486975903c2e51.fit-760w.jpg",
                     Price(
                             20,
@@ -95,6 +103,7 @@ class MarketplaceService {
                     "3",
                     "Caramel Frappe",
                     "Decaf Colombia",
+                    "A deliciously creamy Coffee Kick Frappé, topped with irresistible whipped cream and indulgent Coffee Drizzle. Perfect combination.",
                     "https://www.indigofinance.com.au/wp-content/uploads/2018/07/istock-157528129.jpg ",
                     Price(
                             10,
