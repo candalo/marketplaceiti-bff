@@ -1,7 +1,9 @@
 package com.github.candalo.marketplaceitibff.widgets
 
+import br.com.zup.beagle.annotation.RegisterWidget
 import br.com.zup.beagle.widget.Widget
 
+@RegisterWidget
 data class CartProductWidget(
         val imageUrl: String,
         val productName: String,

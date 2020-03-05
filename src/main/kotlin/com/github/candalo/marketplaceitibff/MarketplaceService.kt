@@ -75,10 +75,10 @@ class MarketplaceService {
                                 product.imageUrl,
                                 product.name,
                                 "#666666",
-                                32,
+                                24,
                                 "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
                                 "#FE5886",
-                                24
+                                20
                         )
                     }
             )
