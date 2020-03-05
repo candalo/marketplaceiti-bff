@@ -41,12 +41,12 @@ class MarketplaceService(private val api: Api) {
     }
 
     fun getProductById(id: String): Screen {
-        val product = getProductsMock()[0]
+        val product = api.fetchProductById(id)
         val productWidget = ProductWidget(
                 product.id,
                 product.name,
                 "#666666",
-                16,
+                24,
                 product.shortDescription,
                 "#909090",
                 12,
@@ -56,7 +56,7 @@ class MarketplaceService(private val api: Api) {
                 product.imageUrl,
                 "${Price.Currency.valueOf(product.price.currencyCode).getSymbol()}${product.price.amount}",
                 "#FE5886",
-                14
+                24
         )
         val productControlWidget = ProductControlWidget("#FE5789")
 
