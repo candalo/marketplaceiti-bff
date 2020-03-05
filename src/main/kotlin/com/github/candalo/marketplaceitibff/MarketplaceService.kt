@@ -1,6 +1,5 @@
 package com.github.candalo.marketplaceitibff
 
-import br.com.zup.beagle.widget.layout.Container
 import br.com.zup.beagle.widget.layout.Horizontal
 import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.ui.ListView
@@ -8,6 +7,7 @@ import com.github.candalo.marketplaceitibff.models.Price
 import com.github.candalo.marketplaceitibff.models.Product
 import com.github.candalo.marketplaceitibff.widgets.OrderStatusWidget
 import com.github.candalo.marketplaceitibff.widgets.ProductControlWidget
+import com.github.candalo.marketplaceitibff.widgets.ProductDetailsWidget
 import com.github.candalo.marketplaceitibff.widgets.ProductWidget
 import org.springframework.stereotype.Service
 
@@ -50,8 +50,9 @@ class MarketplaceService {
                 "#FE5886",
                 14
         )
+        val productControlWidget = ProductControlWidget("#FE5789")
 
-        return Screen(content = ProductControlWidget(productWidget, "#FE5789"))
+        return Screen(content = ProductDetailsWidget(productWidget, productControlWidget))
     }
 
     fun getProductsOrdersStatus(state: String) = Screen(
